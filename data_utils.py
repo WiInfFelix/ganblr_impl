@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from sklearn.preprocessing import LabelEncoder, OrdinalEncoder
+from sklearn.preprocessing import LabelEncoder, KBinsDiscretizer
 
 
 class Dataset:
@@ -20,7 +20,7 @@ class Dataset:
         self.y_test = None
         self.num_features = None
         self.unique_classes = None
-        self._feature_encoder = OrdinalEncoder()
+        self._feature_encoder = LabelEncoder()
         self._target_encoder = LabelEncoder()
 
         self._model = None
@@ -49,9 +49,9 @@ def read_in_test_data():
 
 
 def convert_datasets(
-        datasets: list,
-        prune_high_cardinality: int = 0,
-        max_bins: int = 10,
+    datasets: list,
+    prune_high_cardinality: int = 0,
+    max_bins: int = 10,
 ):
     conv_datasets = []
 
@@ -72,16 +72,15 @@ def convert_datasets(
 
         # encode continuous features to categorical with max_bins
         for col in X.select_dtypes(include=[np.float64, np.int64]).columns:
-            X[col] = pd.cut(X[col].values, bins=np.min([X[col].nunique(), max_bins]), labels=False)
-
+            X[col] = pd.cut(
+                X[col].values, bins=np.min([X[col].nunique(), max_bins]), labels=False
+            )
 
         # drop columns where unique values exceed high cardinality threshold
         if prune_high_cardinality > 0:
             X = X.loc[:, X.nunique() < prune_high_cardinality]
 
-        dataset_class.X = dataset_class._feature_encoder.fit_transform(X).astype(
-            int
-        )
+        dataset_class.X = dataset_class._feature_encoder.fit_transform(X).astype(int)
 
         dataset_class.num_features = dataset_class.X.shape[1]
 
@@ -97,7 +96,6 @@ def convert_datasets(
         ) = train_test_split(
             dataset_class.X, dataset_class.y, test_size=0.2, random_state=42
         )
-
 
         logging.info(f"Dataset {d[0]} converted")
         logging.info(
@@ -118,3 +116,55 @@ def convert_datasets(
     return conv_datasets
 
 
+def preprocess_superstore(frame: pd.DataFrame):
+    preproc_frame = frame.copy()
+
+    # convert postal code to string
+    preproc_frame["Postal Code"] = preproc_frame["Postal Code"].astype(str)
+
+    return preproc_frame
+
+
+def preprocess_credit_risk(frame: pd.DataFrame):
+    preproc_frame = frame.copy()
+
+    preproc_frame = frame.dropna()
+
+    # move loan status to last column
+    preproc_frame = preproc_frame[
+        [col for col in preproc_frame.columns if col != "loan_status"] + ["loan_status"]
+    ]
+
+    return preproc_frame
+
+
+def preprocess_california_housing(frame: pd.DataFrame):
+    preproc_frame = frame.copy()
+
+    preproc_frame = frame.dropna()
+
+    return preproc_frame
+
+
+def transfrom_dataframe_discrete(
+    frame: pd.DataFrame,
+    max_bins: int = 10,
+    encode: str = "ordinal",
+    strategy: str = "kmeans",
+):
+    enc_frame = frame.copy()
+    encoders = {}
+
+    for col_n, col_d in frame.items():
+        if np.issubdtype(col_d, np.number):
+            kbins = KBinsDiscretizer(n_bins=max_bins, encode=encode, strategy=strategy)
+            trans_data = kbins.fit_transform(col_d.values.reshape(-1, 1))
+            enc_frame[col_n] = trans_data
+            encoders[col_n] = kbins
+        else:
+            le = LabelEncoder()
+            trans_data = le.fit_transform(col_d.values)
+            enc_frame[col_n] = trans_data
+            encoders[col_n] = le
+
+    return enc_frame, encoders

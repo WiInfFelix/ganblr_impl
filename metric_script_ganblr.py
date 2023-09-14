@@ -32,7 +32,7 @@ K = [0, 1, 2]
 
 def train_ganblr(dataset: Dataset, k: int = 2):
     model = GANBLR()
-    model.fit(dataset.X_train, dataset.y_train, k=k, epochs=3)
+    model.fit(dataset.X_train, dataset.y_train, k=k, epochs=1)
 
     dataset._model = model
 
