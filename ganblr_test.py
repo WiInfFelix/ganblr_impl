@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 from metric_utils import get_trtr_metrics
 
 
-EPOCHS = [10, 25]  # , 50, 100, 150
+EPOCHS = [10, 25, 50, 100, 150]  
 K = [0, 1, 2]  # , 3, 4, 5
 
 csv_logger = CSVLogger(
@@ -51,30 +51,30 @@ X_credit_train, X_credit_test, y_credit_train, y_credit_test = train_test_split(
 
 for epochs in EPOCHS:
     for k in K:
-        ganblr_superstore = GANBLR()
-        ganblr_superstore.fit(X_super, y_super, epochs=epochs, k=k)
+        # ganblr_superstore = GANBLR()
+        # ganblr_superstore.fit(X_super, y_super, epochs=epochs, k=k)
 
-        # print(ganblr_superstore.evaluate(X_super, y_super))
+        # # print(ganblr_superstore.evaluate(X_super, y_super))
 
-        # sample as many rows as the original dataset
-        synth_data_super = pd.DataFrame(
-            ganblr_superstore.sample(X_super.shape[0]),
-            columns=SUPERSTORE_DF_ENC.columns,
-        )
+        # # sample as many rows as the original dataset
+        # synth_data_super = pd.DataFrame(
+        #     ganblr_superstore.sample(X_super.shape[0]),
+        #     columns=SUPERSTORE_DF_ENC.columns,
+        # )
 
-        # get metrics
-        get_trtr_metrics(
-            X_super_train,
-            X_super_test,
-            y_super_train,
-            y_super_test,
-            synth_data_super,
-            "superstore",
-            "GANBLR",
-            csv_logger,
-            epochs,
-            k,
-        )
+        # # get metrics
+        # get_trtr_metrics(
+        #     X_super_train,
+        #     X_super_test,
+        #     y_super_train,
+        #     y_super_test,
+        #     synth_data_super,
+        #     "superstore",
+        #     "GANBLR",
+        #     csv_logger,
+        #     epochs,
+        #     k,
+        # )
 
         ganblr_credit_risk = GANBLR()
         ganblr_credit_risk.fit(X_credit, y_credit, epochs=epochs, k=k)

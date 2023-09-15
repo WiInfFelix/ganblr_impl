@@ -5,7 +5,8 @@ from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
 from sklearn.svm import SVC
 
 from data_utils import Dataset
-
+from sdv.metadata import SingleTableMetadata
+from sdv.evaluation.single_table import evaluate_quality
 
 def get_trtr_metrics(
     X_train,
@@ -157,5 +158,23 @@ def get_cramers_v(dataset: Dataset):
     logging.info(f"Dataset {name} - Cramers V: {cramers_v}")
 
 
-def get_sdv_metrics(dataset: Dataset):
+def get_sdv_metrics(real_data, synth_data, epochs, k, dataset_name, model, csv_logger):
     """Calculates the evaluation metrics using the SDV library"""
+
+    metadata = SingleTableMetadata()
+    metadata.detect_from_dataframe(real_data)
+    
+    metadata = metadata.to_dict()
+    
+    quality_report = evaluate_quality(synth_data, real_data, metadata)
+    
+    csv_logger.log(
+        Event="sdv_eval",
+        Model=model,
+        Epochs=epochs,
+        K=k,
+        Dataset=dataset_name,
+        Test="sdv_eval",
+        Metric="accuracy",
+        Value=quality_report.get_score,
+    )
