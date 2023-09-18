@@ -3,9 +3,9 @@ from datetime import datetime
 
 
 class CSVLogger:
-    def __init__(self, fieldnames, filename_prefix="log"):
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.filename = f"{filename_prefix}_{timestamp}.csv"
+    def __init__(self, fieldnames, timestamp, filename_prefix="log"):
+        self.timestamp = timestamp
+        self.filename = f"./new_logs/{filename_prefix}_{timestamp}.csv"
         self.fieldnames = fieldnames
         self.file = open(self.filename, "w", newline="")
         self.writer = csv.DictWriter(self.file, fieldnames=fieldnames)

@@ -1,0 +1,67 @@
+,Column 1,Column 2,Metric,Score,Real Correlation,Synthetic Correlation,Error
+0,Ship Mode,Segment,CorrelationSimilarity,0.9992924314648125,-0.0031118752015984455,-0.004527012271973495,
+1,Ship Mode,Country,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+2,Ship Mode,State,CorrelationSimilarity,0.998979812863397,0.009824762991256267,0.01186513726446224,
+3,Ship Mode,Postal Code,CorrelationSimilarity,0.9881027025871498,-0.026659212675871645,-0.002864617850171213,
+4,Ship Mode,Region,CorrelationSimilarity,0.9865949782597396,0.0030013661989366563,-0.023808677281584003,
+5,Ship Mode,Category,CorrelationSimilarity,0.9895215384037624,-0.025086303112461916,-0.004129379919986737,
+6,Ship Mode,Sub-Category,CorrelationSimilarity,0.9969903491870215,0.0027446394301056188,-0.0032746621958514195,
+7,Ship Mode,Sales,CorrelationSimilarity,0.9994764236332371,0.003517377991365572,0.004564530724891455,
+8,Ship Mode,Quantity,CorrelationSimilarity,0.9910540052125263,0.0036138634493991548,0.021505853024346572,
+9,Ship Mode,Discount,CorrelationSimilarity,0.9957749021549028,-0.008286154053508769,0.00016404163668547813,
+10,Ship Mode,Profit,CorrelationSimilarity,0.9904689063645711,-0.02716698349597373,-0.008104796225115984,
+11,Segment,Country,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+12,Segment,State,CorrelationSimilarity,0.9955575184616886,0.006317620733418757,-0.002567342343204075,
+13,Segment,Postal Code,CorrelationSimilarity,0.9983261479897945,0.0012160504908762379,-0.002131653529534889,
+14,Segment,Region,CorrelationSimilarity,0.9980354746847958,-0.009489097558565564,-0.005560046928157104,
+15,Segment,Category,CorrelationSimilarity,0.9898547977566914,-0.010167869690888417,0.010122534795728888,
+16,Segment,Sub-Category,CorrelationSimilarity,0.9977146393885561,0.006372344481363206,0.010943065704250939,
+17,Segment,Sales,CorrelationSimilarity,0.9960682609204403,0.017444616926212887,0.009581138767093494,
+18,Segment,Quantity,CorrelationSimilarity,0.9980657500751019,0.005608951228847114,0.00947745107864333,
+19,Segment,Discount,CorrelationSimilarity,0.9882025895619906,0.007778766374267393,-0.015816054501751445,
+20,Segment,Profit,CorrelationSimilarity,0.9893826949910399,-0.006861398747801184,0.014373211270119032,
+21,Country,State,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+22,Country,Postal Code,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+23,Country,Region,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+24,Country,Category,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+25,Country,Sub-Category,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+26,Country,Sales,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+27,Country,Quantity,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+28,Country,Discount,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+29,Country,Profit,CorrelationSimilarity,,,,ConstantInputError: The real data in column 'Country' contains a constant value. Correlation is undefined for constant data.
+30,State,Postal Code,CorrelationSimilarity,0.845189598348156,0.006083598602776335,-0.3035372047009116,
+31,State,Region,CorrelationSimilarity,0.7750887692440932,0.005422393370067228,-0.4444000681417464,
+32,State,Category,CorrelationSimilarity,0.9889167402919989,-0.015881530178933814,0.006284989237068322,
+33,State,Sub-Category,CorrelationSimilarity,0.9981315758668955,0.001675587858773736,-0.002061260407435313,
+34,State,Sales,CorrelationSimilarity,0.9999711425824507,0.0016984887616493163,0.0017562035967480557,
+35,State,Quantity,CorrelationSimilarity,0.9938832153315854,-0.011063677141097546,0.0011698921957315716,
+36,State,Discount,CorrelationSimilarity,0.9187044965057208,-0.005429538859013549,0.15716146812954476,
+37,State,Profit,CorrelationSimilarity,0.9888793963665437,-0.0042419635535938,-0.026483170820506427,
+38,Postal Code,Region,CorrelationSimilarity,0.7713927160505243,0.011616603474176201,0.46883117137312774,
+39,Postal Code,Category,CorrelationSimilarity,0.9965700295292622,0.002471525672637499,-0.004388415268838152,
+40,Postal Code,Sub-Category,CorrelationSimilarity,0.9965752509403137,0.003802578577176645,-0.0030469195421957774,
+41,Postal Code,Sales,CorrelationSimilarity,0.9874406403490086,0.008634611504330791,-0.016484107797652105,
+42,Postal Code,Quantity,CorrelationSimilarity,0.999268802954932,0.009715203798942088,0.008252809708806182,
+43,Postal Code,Discount,CorrelationSimilarity,0.9923315790538831,-0.00609678043452992,0.00924006145770369,
+44,Postal Code,Profit,CorrelationSimilarity,0.98087874638151,0.017860556684619514,-0.020381950552360643,
+45,Region,Category,CorrelationSimilarity,0.9984512828140846,-0.002050633949352887,-0.005148068321183766,
+46,Region,Sub-Category,CorrelationSimilarity,0.990733288394859,-0.009421255387926885,0.009112167822355154,
+47,Region,Sales,CorrelationSimilarity,0.9944317955285729,0.017905845902556183,0.006769436959701901,
+48,Region,Quantity,CorrelationSimilarity,0.9790104887150605,-0.028008008183670857,0.01397101438620816,
+49,Region,Discount,CorrelationSimilarity,0.8951917680573698,-0.0034997183382896517,-0.2131161822235501,
+50,Region,Profit,CorrelationSimilarity,0.9906803946400254,0.014078209770773209,0.032717420490722224,
+51,Category,Sub-Category,CorrelationSimilarity,0.9557389388568932,0.012867257840565888,-0.0756548644456477,
+52,Category,Sales,CorrelationSimilarity,0.9864393391653625,0.03360324415573361,0.006481922486458713,
+53,Category,Quantity,CorrelationSimilarity,0.9907121455226655,0.0156170866198922,-0.0029586223347767143,
+54,Category,Discount,CorrelationSimilarity,0.9890377610528543,-0.042510899970710614,-0.06443537786500202,
+55,Category,Profit,CorrelationSimilarity,0.9917549671125614,0.12160129260054563,0.10511122682566844,
+56,Sub-Category,Sales,CorrelationSimilarity,0.9886173180037813,0.11717551579760085,0.0944101518051634,
+57,Sub-Category,Quantity,CorrelationSimilarity,0.9893081993964046,0.005661425121164426,-0.015722176086026378,
+58,Sub-Category,Discount,CorrelationSimilarity,0.8763559824679884,0.08820435110756372,-0.1590836839564594,
+59,Sub-Category,Profit,CorrelationSimilarity,0.9698872128189329,-0.10758386109016063,-0.04735828672802631,
+60,Sales,Quantity,CorrelationSimilarity,0.8824148448473146,0.01504693580690477,0.2502172461122755,
+61,Sales,Discount,CorrelationSimilarity,0.9387682395577452,0.08649380336867554,-0.03596971751583385,
+62,Sales,Profit,CorrelationSimilarity,0.8757488436087996,0.04950030901166192,0.2980026217940627,
+63,Quantity,Discount,CorrelationSimilarity,0.9895818886155459,-0.011875824817557657,0.008960397951350525,
+64,Quantity,Profit,CorrelationSimilarity,0.978382324554676,0.007175935124719795,0.050411286015367734,
+65,Discount,Profit,CorrelationSimilarity,0.9692550499805332,-0.32161735236744277,-0.26012745232850915,

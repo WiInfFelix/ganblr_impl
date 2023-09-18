@@ -1,0 +1,84 @@
+2023-09-03 20:04:38,359, INFO [metric_script_ganblr.py:55] Starting analysis
+2023-09-03 20:04:38,454, INFO [data_utils.py:59] Converting dataset credit_risk_dataset
+2023-09-03 20:04:38,530, INFO [data_utils.py:109] Dataset credit_risk_dataset converted
+2023-09-03 20:04:38,531, INFO [data_utils.py:110] Dataset credit_risk_dataset has [0 1 2 3 4 5 6 7 8 9] unique target classes
+2023-09-03 20:04:38,531, INFO [data_utils.py:113] Dataset credit_risk_dataset has 11 features
+2023-09-03 20:04:38,531, INFO [data_utils.py:114] Dataset credit_risk_dataset has 69 unique classes
+2023-09-03 20:04:38,533, INFO [data_utils.py:118] Dataset credit_risk_dataset has 32581 rows
+2023-09-03 20:04:38,548, INFO [data_utils.py:120] Dataset credit_risk_dataset feature head:
+   0   1   2   3   4   5   6   7   8   9   10
+0   0   0   3   4   4   3   9   5   1   7   1
+1   0   0   2   0   1   1   0   3   0   1   0
+2   0   0   0   0   3   2   1   4   1   6   0
+2023-09-03 20:04:38,551, INFO [data_utils.py:121] Dataset credit_risk_dataset target head:
+   0
+0  0
+1  0
+2  0
+2023-09-03 20:04:38,551, INFO [data_utils.py:59] Converting dataset SampleSuperstore
+2023-09-03 20:04:38,595, INFO [data_utils.py:109] Dataset SampleSuperstore converted
+2023-09-03 20:04:38,596, INFO [data_utils.py:110] Dataset SampleSuperstore has [0 1 2 3 4 5 6 7 8 9] unique target classes
+2023-09-03 20:04:38,596, INFO [data_utils.py:113] Dataset SampleSuperstore has 11 features
+2023-09-03 20:04:38,596, INFO [data_utils.py:114] Dataset SampleSuperstore has 119 unique classes
+2023-09-03 20:04:38,596, INFO [data_utils.py:118] Dataset SampleSuperstore has 9994 rows
+2023-09-03 20:04:38,610, INFO [data_utils.py:120] Dataset SampleSuperstore feature head:
+   0   1   2   3   4   5   6   7   8   9   10
+0   2   0   0  15   4   2   0   4   0   0   0
+1   2   0   0  15   4   2   0   5   0   1   0
+2   2   1   0   3   9   3   1  10   0   0   0
+2023-09-03 20:04:38,613, INFO [data_utils.py:121] Dataset SampleSuperstore target head:
+   0
+0  4
+1  4
+2  4
+2023-09-03 20:04:38,613, INFO [metric_script_ganblr.py:63] Training GANBLR on dataset credit_risk_dataset
+2023-09-03 20:05:46,752, INFO [metric_script_ganblr.py:65] Model trained on dataset credit_risk_dataset
+2023-09-03 20:05:46,752, INFO [metric_script_ganblr.py:66] Generating synthetic data for dataset credit_risk_dataset
+2023-09-03 20:05:47,173, INFO [metric_script_ganblr.py:72] Starting analysis on dataset credit_risk_dataset
+2023-09-03 20:05:47,174, INFO [metric_utils.py:11] Getting metrics for dataset credit_risk_dataset
+2023-09-03 20:05:48,322, INFO [metric_utils.py:22] Dataset credit_risk_dataset - Adaboost accuracy on real data: 0.5947521865889213
+2023-09-03 20:05:51,545, INFO [metric_utils.py:29] Dataset credit_risk_dataset - Random Forest accuracy on real data: 0.5642166641092528
+2023-09-03 20:06:15,771, INFO [metric_utils.py:36] Dataset credit_risk_dataset - SVM accuracy on real data: 0.5548565290777965
+2023-09-03 20:06:15,963, INFO [metric_utils.py:42] Dataset credit_risk_dataset - Adaboost accuracy on synthetic data: 0.315482584011048
+2023-09-03 20:06:16,216, INFO [metric_utils.py:49] Dataset credit_risk_dataset - Random Forest accuracy on synthetic data: 0.15528617462022404
+2023-09-03 20:06:16,226, INFO [metric_script_ganblr.py:63] Training GANBLR on dataset SampleSuperstore
+2023-09-03 20:06:52,989, INFO [metric_script_ganblr.py:65] Model trained on dataset SampleSuperstore
+2023-09-03 20:06:52,991, INFO [metric_script_ganblr.py:66] Generating synthetic data for dataset SampleSuperstore
+2023-09-03 20:06:53,351, INFO [metric_script_ganblr.py:72] Starting analysis on dataset SampleSuperstore
+2023-09-03 20:06:53,352, INFO [metric_utils.py:11] Getting metrics for dataset SampleSuperstore
+2023-09-03 20:06:53,774, INFO [metric_utils.py:22] Dataset SampleSuperstore - Adaboost accuracy on real data: 0.9889944972486243
+2023-09-03 20:06:54,166, INFO [metric_utils.py:29] Dataset SampleSuperstore - Random Forest accuracy on real data: 0.9889944972486243
+2023-09-03 20:06:54,312, INFO [metric_utils.py:36] Dataset SampleSuperstore - SVM accuracy on real data: 0.9889944972486243
+2023-09-03 20:06:54,323, INFO [metric_utils.py:42] Dataset SampleSuperstore - Adaboost accuracy on synthetic data: 0.9889944972486243
+2023-09-03 20:06:54,551, INFO [metric_utils.py:49] Dataset SampleSuperstore - Random Forest accuracy on synthetic data: 0.9889944972486243
+2023-09-03 20:06:54,551, INFO [metric_script_ganblr.py:63] Training GANBLR on dataset credit_risk_dataset
+2023-09-03 20:08:01,060, INFO [metric_script_ganblr.py:65] Model trained on dataset credit_risk_dataset
+2023-09-03 20:08:01,060, INFO [metric_script_ganblr.py:66] Generating synthetic data for dataset credit_risk_dataset
+2023-09-03 20:08:01,455, INFO [metric_script_ganblr.py:72] Starting analysis on dataset credit_risk_dataset
+2023-09-03 20:08:01,455, INFO [metric_utils.py:11] Getting metrics for dataset credit_risk_dataset
+2023-09-03 20:08:02,552, INFO [metric_utils.py:22] Dataset credit_risk_dataset - Adaboost accuracy on real data: 0.5947521865889213
+2023-09-03 20:08:05,567, INFO [metric_utils.py:29] Dataset credit_risk_dataset - Random Forest accuracy on real data: 0.5614546570507902
+2023-09-03 20:08:29,734, INFO [metric_utils.py:36] Dataset credit_risk_dataset - SVM accuracy on real data: 0.5548565290777965
+2023-09-03 20:08:29,923, INFO [metric_utils.py:42] Dataset credit_risk_dataset - Adaboost accuracy on synthetic data: 0.5514807426730091
+2023-09-03 20:08:30,194, INFO [metric_utils.py:49] Dataset credit_risk_dataset - Random Forest accuracy on synthetic data: 0.5548565290777965
+2023-09-03 20:08:30,206, INFO [metric_script_ganblr.py:63] Training GANBLR on dataset SampleSuperstore
+2023-09-03 20:09:07,144, INFO [metric_script_ganblr.py:65] Model trained on dataset SampleSuperstore
+2023-09-03 20:09:07,145, INFO [metric_script_ganblr.py:66] Generating synthetic data for dataset SampleSuperstore
+2023-09-03 20:09:07,504, INFO [metric_script_ganblr.py:72] Starting analysis on dataset SampleSuperstore
+2023-09-03 20:09:07,504, INFO [metric_utils.py:11] Getting metrics for dataset SampleSuperstore
+2023-09-03 20:09:07,953, INFO [metric_utils.py:22] Dataset SampleSuperstore - Adaboost accuracy on real data: 0.9889944972486243
+2023-09-03 20:09:08,347, INFO [metric_utils.py:29] Dataset SampleSuperstore - Random Forest accuracy on real data: 0.9889944972486243
+2023-09-03 20:09:08,485, INFO [metric_utils.py:36] Dataset SampleSuperstore - SVM accuracy on real data: 0.9889944972486243
+2023-09-03 20:09:08,495, INFO [metric_utils.py:42] Dataset SampleSuperstore - Adaboost accuracy on synthetic data: 0.9889944972486243
+2023-09-03 20:09:08,709, INFO [metric_utils.py:49] Dataset SampleSuperstore - Random Forest accuracy on synthetic data: 0.9889944972486243
+2023-09-03 20:09:08,709, INFO [metric_script_ganblr.py:63] Training GANBLR on dataset credit_risk_dataset
+2023-09-03 20:10:13,449, INFO [metric_script_ganblr.py:65] Model trained on dataset credit_risk_dataset
+2023-09-03 20:10:13,450, INFO [metric_script_ganblr.py:66] Generating synthetic data for dataset credit_risk_dataset
+2023-09-03 20:10:13,817, INFO [metric_script_ganblr.py:72] Starting analysis on dataset credit_risk_dataset
+2023-09-03 20:10:13,817, INFO [metric_utils.py:11] Getting metrics for dataset credit_risk_dataset
+2023-09-03 20:10:14,908, INFO [metric_utils.py:22] Dataset credit_risk_dataset - Adaboost accuracy on real data: 0.5947521865889213
+2023-09-03 20:10:17,932, INFO [metric_utils.py:29] Dataset credit_risk_dataset - Random Forest accuracy on real data: 0.561301212214209
+2023-09-03 20:10:42,071, INFO [metric_utils.py:36] Dataset credit_risk_dataset - SVM accuracy on real data: 0.5548565290777965
+2023-09-03 20:10:42,241, INFO [metric_utils.py:42] Dataset credit_risk_dataset - Adaboost accuracy on synthetic data: 0.5364431486880467
+2023-09-03 20:10:42,473, INFO [metric_utils.py:49] Dataset credit_risk_dataset - Random Forest accuracy on synthetic data: 0.479975448826147
+2023-09-03 20:10:42,485, INFO [metric_script_ganblr.py:63] Training GANBLR on dataset SampleSuperstore

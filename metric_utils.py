@@ -114,24 +114,18 @@ def get_trtr_metrics(
     )
 
 
-def get_distance_metrics(dataset):
+def get_distance_metrics(real_data, synth_data):
     """Gets wasserstein, chi squared and kolmogorov smirnov distance metrics for real and synthetic data"""
 
     logging.info(f"Getting distance metrics for dataset {name}")
 
-    # get real data
-    real_data = data.iloc[:, :-1]
-
-    # get synthetic data
-    synth_data = synth_data.iloc[:, :-1]
-
-    # get wasserstein distance
+    # get wasserstein distance from dataframes
     wasserstein = stats.wasserstein_distance(real_data, synth_data)
-
-    # get chi squared distance
+    
+    # get chi squared distance from dataframes
     chi_squared = stats.chisquare(real_data, synth_data)
-
-    # get kolmogorov smirnov distance
+    
+    # get kolmogorov smirnov distance from dataframes
     kolmogorov_smirnov = stats.ks_2samp(real_data, synth_data)
 
     # log all metrics
@@ -140,7 +134,7 @@ def get_distance_metrics(dataset):
     logging.info(f"Dataset {name} - Kolmogorov smirnov distance: {kolmogorov_smirnov}")
 
 
-def get_cramers_v(dataset: Dataset):
+def get_cramers_v(real_data, synth_data):
     """Gets cramers v metric for real and synthetic data"""
 
     logging.info(f"Getting Cramers V metric for dataset {name}")
@@ -158,13 +152,13 @@ def get_cramers_v(dataset: Dataset):
     logging.info(f"Dataset {name} - Cramers V: {cramers_v}")
 
 
-def get_sdv_metrics(real_data, synth_data, epochs, k, dataset_name, model, csv_logger):
+def get_sdv_metrics(real_data, synth_data, epochs, k, dataset_name, model, csv_logger, timestamp):
     """Calculates the evaluation metrics using the SDV library"""
 
     metadata = SingleTableMetadata()
     metadata.detect_from_dataframe(real_data)
     
-    metadata = metadata.to_dict()
+    #metadata = metadata.to_dict()
     
     quality_report = evaluate_quality(synth_data, real_data, metadata)
     
@@ -175,6 +169,15 @@ def get_sdv_metrics(real_data, synth_data, epochs, k, dataset_name, model, csv_l
         K=k,
         Dataset=dataset_name,
         Test="sdv_eval",
-        Metric="accuracy",
-        Value=quality_report.get_score,
+        Metric="quality_score",
+        Value=quality_report.get_score(),
     )
+    
+    report_columns_shapes = quality_report.get_details("Column Shapes")
+    report_column_trends = quality_report.get_details("Column Pair Trends")
+    
+    report_columns_shapes.to_csv(f"./sdv_frames/{timestamp}_report_columns_shapes_{dataset_name}_{epochs}_{k}.csv")
+    report_column_trends.to_csv(f"./sdv_frames/{timestamp}_report_column_trends_{dataset_name}_{epochs}_{k}.csv")
+    
+    
+    #quality_report.save(f"quality_report_{dataset_name}_{epochs}_{k}.json")

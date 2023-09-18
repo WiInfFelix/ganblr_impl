@@ -1,0 +1,13 @@
+2023-09-03 20:20:46,074, INFO [metric_script_ganblr.py:55] Starting analysis
+2023-09-03 20:20:46,164, INFO [data_utils.py:59] Converting dataset credit_risk_dataset
+2023-09-03 20:20:46,239, INFO [data_utils.py:102] Dataset credit_risk_dataset converted
+2023-09-03 20:20:46,239, INFO [data_utils.py:103] Dataset credit_risk_dataset has [0 1 2 3 4 5 6 7 8 9] unique target classes
+2023-09-03 20:20:46,239, INFO [data_utils.py:106] Dataset credit_risk_dataset has 11 features
+2023-09-03 20:20:46,239, INFO [data_utils.py:107] Dataset credit_risk_dataset has 69 unique classes
+2023-09-03 20:20:46,242, INFO [data_utils.py:111] Dataset credit_risk_dataset has 32581 rows
+2023-09-03 20:20:46,243, INFO [data_utils.py:113] Dataset credit_risk_dataset feature head:
+[[0 0 3 4 4 3 9 5 1 7 1]
+ [0 0 2 0 1 1 0 3 0 1 0]
+ [0 0 0 0 3 2 1 4 1 6 0]
+ [0 0 3 0 3 2 9 5 1 6 0]
+ [0 0 3 0 3 2 9 4 1 6 1]]

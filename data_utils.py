@@ -118,9 +118,13 @@ def convert_datasets(
 
 def preprocess_superstore(frame: pd.DataFrame):
     preproc_frame = frame.copy()
+    
+    preproc_frame["Postal Code"] = round(preproc_frame["Postal Code"] / 1000) * 1000
 
     # convert postal code to string
     preproc_frame["Postal Code"] = preproc_frame["Postal Code"].astype(str)
+    
+    preproc_frame = preproc_frame.drop("City", axis=1)
 
     return preproc_frame
 
@@ -138,10 +142,14 @@ def preprocess_credit_risk(frame: pd.DataFrame):
     return preproc_frame
 
 
-def preprocess_california_housing(frame: pd.DataFrame):
+def preprocess_mushroom(frame: pd.DataFrame):
     preproc_frame = frame.copy()
 
     preproc_frame = frame.dropna()
+    
+    preproc_frame = preproc_frame[
+        [col for col in preproc_frame.columns if col != "class"] + ["class"]
+    ]
 
     return preproc_frame
 

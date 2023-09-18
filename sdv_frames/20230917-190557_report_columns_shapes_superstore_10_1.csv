@@ -1,0 +1,13 @@
+,Column,Metric,Score
+0,Ship Mode,KSComplement,0.7115269161496898
+1,Segment,KSComplement,0.841004602761657
+2,Country,KSComplement,1.0
+3,State,KSComplement,0.9093456073644186
+4,Postal Code,KSComplement,0.8796277766659996
+5,Region,KSComplement,0.9372623574144486
+6,Category,KSComplement,0.7862717630578346
+7,Sub-Category,KSComplement,0.8649189513708225
+8,Sales,KSComplement,0.6939163498098859
+9,Quantity,KSComplement,0.7517510506303782
+10,Discount,KSComplement,0.8432059235541325
+11,Profit,KSComplement,0.9970982589553732
