@@ -1,0 +1,13 @@
+,Column,Metric,Score
+0,person_age,KSComplement,0.3394091766184789
+1,person_income,KSComplement,0.7945038061317131
+2,person_home_ownership,KSComplement,0.6785739227599692
+3,person_emp_length,KSComplement,0.42502968084363435
+4,loan_intent,KSComplement,0.935156086318877
+5,loan_grade,KSComplement,0.8222292059501362
+6,loan_amnt,KSComplement,0.6310496543054682
+7,loan_int_rate,KSComplement,0.8785529715762274
+8,loan_percent_income,KSComplement,0.7284028214260773
+9,cb_person_default_on_file,KSComplement,0.9453523290732593
+10,cb_person_cred_hist_length,KSComplement,0.32201969411271736
+11,loan_status,KSComplement,0.9958796005307633
