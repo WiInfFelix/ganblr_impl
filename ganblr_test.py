@@ -16,7 +16,7 @@ from sdv.metadata import SingleTableMetadata
 from sdv.single_table import CTGANSynthesizer
 
 EPOCHS = [10, 25, 50, 100, 150]  
-K = [0, 1]  # , 2, 3, 4, 5
+K = [0, 1, 2, 3, 4, 5]  #
 
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
 
