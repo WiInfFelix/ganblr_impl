@@ -123,7 +123,7 @@ def process_dataset(dataset_name, X, y, df_enc, encoders, X_train, X_test, y_tra
                 synth_data=synth_data_ctgan,
                 dataset_name=dataset_name,
                 model="CTGAN",
-                csv_logger=overall_logfile,
+                overall_logfile=overall_logfile,
                 epochs=epoch,
                 k=0,
                 timestamp=timestamp_id,
