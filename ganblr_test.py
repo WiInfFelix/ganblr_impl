@@ -1,5 +1,6 @@
+from time import sleep
 import pandas as pd
-
+import tracemalloc
 # import numpy as np
 from ganblr.models import GANBLR
 from data_utils import (
@@ -14,20 +15,135 @@ from metric_utils import get_trtr_metrics, get_sdv_metrics
 from datetime import datetime
 from sdv.metadata import SingleTableMetadata
 from sdv.single_table import CTGANSynthesizer
+from pathlib import Path
 
-EPOCHS = [10, 25, 50, 100, 150]  
-K = [0, 1, 2, 3, 4, 5]  #
+import os
+import gc
 
-timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+EPOCHS = [10, 25, 50, 100,  150]
+K = [0,1]  #
 
-csv_logger = CSVLogger(timestamp=timestamp,
-    fieldnames=["Event", "Model", "Epochs", "K", "Dataset", "Test", "Metric", "Value"]
-)
+overall_logfile = Path(f"./new_logs/log_{datetime.now().strftime('%Y%m%d-%H%M%S')}.csv")
+
+os.environ['XLA_FLAGS'] = '--xla_gpu_cuda_data_dir=/usr/lib/cuda/' 
+
+timestamp_id = datetime.now().strftime("%Y%m%d-%H%M%S")
+
+with open(overall_logfile, "w") as f:
+    # write with ; as delimiter
+    f.write("Event;Model;Epochs;K;Dataset;Test;Metric;Value\n")
+
+tracemalloc.start()
+
+def process_dataset(dataset_name, X, y, df_enc, encoders, X_train, X_test, y_train, y_test, epochs, K, timestamp_id, overall_logfile):
+    for epoch in epochs:
+        for k in K:
+            for i in range(1, 4):
+                ganblr = GANBLR()
+                ganblr.fit(X, y, epochs=epoch, k=k)
+
+                # sample as many rows as the original dataset
+                synth_data = pd.DataFrame(
+                    ganblr.sample(X.shape[0]),
+                    columns=df_enc.columns,
+                )
+
+                # decode the categorical columns
+                synth_data_clear = synth_data.copy()
+                for col in df_enc.columns:
+                    synth_data_clear[col] = encoders[col].inverse_transform(
+                        synth_data[[col]].astype(int)
+                    )
+
+                synth_data_clear.to_csv(f"./synth_data/{timestamp_id}_ganblr_synth_data_{dataset_name}_{epoch}_{k}_{i}.csv")
+
+                # get metrics
+                get_trtr_metrics(
+                    X_train,
+                    X_test,
+                    y_train,
+                    y_test,
+                    synth_data,
+                    dataset_name,
+                    "GANBLR",
+                    overall_logfile,
+                    epoch,
+                    k,
+                )
+
+                get_sdv_metrics(
+                    real_data=df_enc,
+                    synth_data=synth_data,
+                    dataset_name=dataset_name,
+                    model="GANBLR",
+                    overall_logfile=overall_logfile,
+                    epochs=epoch,
+                    k=k,
+                    timestamp=timestamp_id,
+                    i=i
+                )
+
+                del ganblr
+                gc.collect()
+        
+        for i in range(1, 4):
+            metadata = SingleTableMetadata()
+            metadata.detect_from_dataframe(data=df_enc)
+            ctgan = CTGANSynthesizer(metadata, epochs=epoch)
+            ctgan.fit(df_enc)
+
+            synth_data_ctgan = pd.DataFrame(
+                ctgan.sample(X.shape[0]),
+                columns=df_enc.columns,
+            )
+
+            synth_data_ctgan_clear = synth_data_ctgan.copy()
+            for col in df_enc.columns:
+                synth_data_ctgan_clear[col] = encoders[col].inverse_transform(
+                    synth_data_ctgan[[col]].astype(int)
+                )
+
+            synth_data_ctgan_clear.to_csv(f"./synth_data/{timestamp_id}_ctgan_synth_data_{dataset_name}_{epoch}_{k}_{i}.csv")
+
+            get_trtr_metrics(
+                X_train,
+                X_test,
+                y_train,
+                y_test,
+                synth_data_ctgan,
+                dataset_name,
+                "CTGAN",
+                overall_logfile,
+                epoch,
+                0,
+            )
+
+            get_sdv_metrics(
+                real_data=df_enc,
+                synth_data=synth_data_ctgan,
+                dataset_name=dataset_name,
+                model="CTGAN",
+                csv_logger=overall_logfile,
+                epochs=epoch,
+                k=0,
+                timestamp=timestamp_id,
+                i=i
+            )
+
+            del ctgan
+            gc.collect()
 
 
-SUPERSTORE_DF = pd.read_csv("datasets\SampleSuperstore.csv")
-CREDIT_RISK_DF = pd.read_csv("datasets\credit_risk_dataset.csv")
-MUSHROOMS_DF = pd.read_csv("datasets\mushrooms.csv")
+
+
+
+SUPERSTORE_PATH = Path("datasets/SampleSuperstore.csv")
+CREDIT_RISK_PATH = Path("datasets/credit_risk_dataset.csv")
+MUSHROOMS_PATH = Path("datasets/mushrooms.csv")
+
+SUPERSTORE_DF = pd.read_csv(SUPERSTORE_PATH)
+CREDIT_RISK_DF = pd.read_csv(CREDIT_RISK_PATH)
+MUSHROOMS_DF = pd.read_csv(MUSHROOMS_PATH)
 
 SUPERSTORE_DF = preprocess_superstore(SUPERSTORE_DF)
 CREDIT_RISK_DF = preprocess_credit_risk(CREDIT_RISK_DF)
@@ -37,8 +153,11 @@ SUPERSTORE_DF_ENC, SUPERSTORE_ENCODERS = transfrom_dataframe_discrete(SUPERSTORE
 CREDIT_RISK_DF_ENC, CREDIT_RISK_ENCODERS = transfrom_dataframe_discrete(CREDIT_RISK_DF)
 MUSHROOMS_DF_ENC, MUSHROOMS_ENCODERS = transfrom_dataframe_discrete(MUSHROOMS_DF)
 
-print(SUPERSTORE_DF_ENC.head())
 
+# cast all columns to categorical
+# SUPERSTORE_DF_ENC = SUPERSTORE_DF_ENC.astype("category")
+# CREDIT_RISK_DF_ENC = CREDIT_RISK_DF_ENC.astype("category")
+# MUSHROOMS_DF_ENC = MUSHROOMS_DF_ENC.astype("category")
 
 X_super = SUPERSTORE_DF_ENC.drop("Profit", axis=1)
 y_super = SUPERSTORE_DF_ENC["Profit"]
@@ -62,208 +181,57 @@ X_mushrooms_train, X_mushrooms_test, y_mushrooms_train, y_mushrooms_test = train
     X_mushrooms, y_mushrooms, test_size=0.2, random_state=42
 )
 
-for epochs in EPOCHS:
-    for k in K:
-        ganblr_superstore = GANBLR()
-        ganblr_superstore.fit(X_super, y_super, epochs=epochs, k=k)
 
-        # sample as many rows as the original dataset
-        synth_data_super = pd.DataFrame(
-            ganblr_superstore.sample(X_super.shape[0]),
-            columns=SUPERSTORE_DF_ENC.columns,
-        )
+process_dataset(
+    "superstore",
+    X_super,
+    y_super,
+    SUPERSTORE_DF_ENC,
+    SUPERSTORE_ENCODERS,
+    X_super_train,
+    X_super_test,
+    y_super_train,
+    y_super_test,
+    EPOCHS,
+    K,
+    timestamp_id,
+    overall_logfile
+)
 
-        # get metrics
-        get_trtr_metrics(
-            X_super_train,
-            X_super_test,
-            y_super_train,
-            y_super_test,
-            synth_data_super,
-            "superstore",
-            "GANBLR",
-            csv_logger,
-            epochs,
-            k,
-        )
-        
-        get_sdv_metrics(
-            real_data=SUPERSTORE_DF_ENC,
-            synth_data=synth_data_super,
-            dataset_name="superstore",
-            model="GANBLR",
-            csv_logger=csv_logger,
-            epochs=epochs,
-            k=k,
-            timestamp=timestamp,
-        )
+snapshot = tracemalloc.take_snapshot()
+top_stats = snapshot.statistics('lineno')
+for stat in top_stats[:10]:
+    print(stat)
 
-        ganblr_credit_risk = GANBLR()
-        ganblr_credit_risk.fit(X_credit, y_credit, epochs=epochs, k=k)
 
-        # sample as many rows as the original dataset
-        synth_data_credit = pd.DataFrame(
-            ganblr_credit_risk.sample(X_credit.shape[0]),
-            columns=CREDIT_RISK_DF_ENC.columns,
-        )
+process_dataset(
+    "credit_risk",
+    X_credit,
+    y_credit,
+    CREDIT_RISK_DF_ENC,
+    CREDIT_RISK_ENCODERS,
+    X_credit_train,
+    X_credit_test,
+    y_credit_train,
+    y_credit_test,
+    EPOCHS,
+    K,
+    timestamp_id,
+    overall_logfile
+)
 
-        get_trtr_metrics(
-            X_credit_train,
-            X_credit_test,
-            y_credit_train,
-            y_credit_test,
-            synth_data_credit,
-            "credit_risk",
-            "GANBLR",
-            csv_logger,
-            epochs,
-            k,
-        )
-        
-        get_sdv_metrics(
-            real_data=CREDIT_RISK_DF_ENC,
-            synth_data=synth_data_credit,
-            dataset_name="credit_risk",
-            model="GANBLR",
-            csv_logger=csv_logger,
-            epochs=epochs,
-            k=k,
-            timestamp=timestamp,
-        )
-        
-        
-        ganblr_mushrooms = GANBLR()
-        ganblr_mushrooms.fit(X_mushrooms, y_mushrooms, epochs=epochs, k=k)
-        
-        # sample as many rows as the original dataset
-        synth_data_mushrooms = pd.DataFrame(
-            ganblr_mushrooms.sample(X_mushrooms.shape[0]),
-            columns=MUSHROOMS_DF.columns,
-        )
-        
-        get_trtr_metrics(
-            X_mushrooms_train,
-            X_mushrooms_test,
-            y_mushrooms_train,
-            y_mushrooms_test,
-            synth_data_mushrooms,
-            "mushrooms",
-            "GANBLR",
-            csv_logger,
-            epochs,
-            k,
-        )
-        
-        get_sdv_metrics(
-            real_data=MUSHROOMS_DF_ENC,
-            synth_data=synth_data_mushrooms,
-            dataset_name="mushrooms",
-            model="GANBLR",
-            csv_logger=csv_logger,
-            epochs=epochs,
-            k=k,
-            timestamp=timestamp,
-        )
-        
-    superstore_metadata = SingleTableMetadata()
-    superstore_metadata.detect_from_dataframe(data=SUPERSTORE_DF_ENC)
-    superstore_ctgan = CTGANSynthesizer(superstore_metadata)
-    superstore_ctgan.fit(SUPERSTORE_DF_ENC)
-    
-    synth_data_superstore_ctgan = pd.DataFrame(
-        superstore_ctgan.sample(X_super.shape[0]),
-        columns=SUPERSTORE_DF_ENC.columns,
-    )
-    
-    get_trtr_metrics(
-        X_super_train,
-        X_super_test,
-        y_super_train,
-        y_super_test,
-        synth_data_superstore_ctgan,
-        "superstore",
-        "CTGAN",
-        csv_logger,
-        epochs,
-        0,
-    )
-    
-    get_sdv_metrics(
-        real_data=SUPERSTORE_DF_ENC,
-        synth_data=synth_data_superstore_ctgan,
-        dataset_name="superstore",
-        model="CTGAN",
-        csv_logger=csv_logger,
-        epochs=epochs,
-        k=0,
-        timestamp=timestamp,
-    )
-    
-    credit_risk_metadata = SingleTableMetadata()
-    credit_risk_metadata.detect_from_dataframe(data=CREDIT_RISK_DF_ENC)
-    credit_risk_ctgan = CTGANSynthesizer(credit_risk_metadata)
-    credit_risk_ctgan.fit(CREDIT_RISK_DF_ENC)
-    
-    synth_data_credit_risk_ctgan = pd.DataFrame(
-        credit_risk_ctgan.sample(X_credit.shape[0]),
-        columns=CREDIT_RISK_DF_ENC.columns,
-    )
-    
-    get_trtr_metrics(
-        X_credit_train,
-        X_credit_test,
-        y_credit_train,
-        y_credit_test,
-        synth_data_credit_risk_ctgan,
-        "credit_risk",
-        "CTGAN",
-        csv_logger,
-        epochs,
-        0,
-    )
-    
-    get_sdv_metrics(
-        real_data=CREDIT_RISK_DF_ENC,
-        synth_data=synth_data_credit_risk_ctgan,
-        dataset_name="credit_risk",
-        model="CTGAN",
-        csv_logger=csv_logger,
-        epochs=epochs,
-        k=0,
-        timestamp=timestamp,
-    )
-    
-    mushrooms_metadata = SingleTableMetadata()
-    mushrooms_metadata.detect_from_dataframe(data=MUSHROOMS_DF_ENC)
-    mushrooms_ctgan = CTGANSynthesizer(mushrooms_metadata)
-    mushrooms_ctgan.fit(MUSHROOMS_DF_ENC)
-    
-    synth_data_mushrooms_ctgan = pd.DataFrame(
-        mushrooms_ctgan.sample(X_mushrooms.shape[0]),
-        columns=MUSHROOMS_DF_ENC.columns,
-    )
-    
-    get_trtr_metrics(
-        X_mushrooms_train,
-        X_mushrooms_test,
-        y_mushrooms_train,
-        y_mushrooms_test,
-        synth_data_mushrooms_ctgan,
-        "mushrooms",
-        "CTGAN",
-        csv_logger,
-        epochs,
-        0,
-    )
-    
-    get_sdv_metrics(
-        real_data=MUSHROOMS_DF_ENC,
-        synth_data=synth_data_mushrooms_ctgan,
-        dataset_name="mushrooms",
-        model="CTGAN",
-        csv_logger=csv_logger,
-        epochs=epochs,
-        k=0,
-        timestamp=timestamp,
-    )
-    
+process_dataset(
+    "mushrooms",
+    X_mushrooms,
+    y_mushrooms,
+    MUSHROOMS_DF_ENC,
+    MUSHROOMS_ENCODERS,
+    X_mushrooms_train,
+    X_mushrooms_test,
+    y_mushrooms_train,
+    y_mushrooms_test,
+    EPOCHS,
+    K,
+    timestamp_id,
+    overall_logfile
+)
