@@ -165,7 +165,12 @@ def transfrom_dataframe_discrete(
 
     for col_n, col_d in frame.items():
         if np.issubdtype(col_d, np.number):
-            kbins = KBinsDiscretizer(n_bins=max_bins, encode=encode, strategy=strategy)
+            if col_d.nunique() <= max_bins:
+                kbins = KBinsDiscretizer(
+                    n_bins=col_d.nunique(), encode=encode, strategy=strategy
+                )
+            else:
+                kbins = KBinsDiscretizer(n_bins=max_bins, encode=encode, strategy=strategy)
             trans_data = kbins.fit_transform(col_d.values.reshape(-1, 1))
             enc_frame[col_n] = trans_data
             encoders[col_n] = kbins

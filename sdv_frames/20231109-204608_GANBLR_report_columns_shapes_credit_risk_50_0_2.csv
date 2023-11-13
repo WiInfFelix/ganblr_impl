@@ -1,0 +1,13 @@
+,Column,Metric,Score
+0,person_age,TVComplement,0.26496263705566014
+1,person_income,TVComplement,0.3451707521474965
+2,person_home_ownership,TVComplement,0.4451428172358405
+3,person_emp_length,TVComplement,0.3851176758153503
+4,loan_intent,TVComplement,0.9109225504574342
+5,loan_grade,TVComplement,0.7278441231929604
+6,loan_amnt,TVComplement,0.5680564285215448
+7,loan_int_rate,TVComplement,0.7359103289335848
+8,loan_percent_income,TVComplement,0.7626580068440534
+9,cb_person_default_on_file,TVComplement,0.7758572526014387
+10,cb_person_cred_hist_length,TVComplement,0.40673231370905794
+11,loan_status,TVComplement,0.9983588239402192

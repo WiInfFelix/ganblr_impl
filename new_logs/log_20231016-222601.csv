@@ -1,4 +1,0 @@
-Event,Model,Epochs,K,Dataset,Test,Metric,Value
-trtr,GANBLR,10,0,superstore,adaboost,accuracy,0.9104552276138069
-trtr,GANBLR,10,0,superstore,random_forest,accuracy,0.9649824912456229
-trtr,GANBLR,10,0,superstore,svm,accuracy,0.928464232116058

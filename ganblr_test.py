@@ -9,7 +9,7 @@ from data_utils import (
     preprocess_credit_risk,
     preprocess_mushroom
 )
-from logger_utils import CSVLogger
+
 from sklearn.model_selection import train_test_split
 from metric_utils import get_trtr_metrics, get_sdv_metrics
 from datetime import datetime
@@ -20,8 +20,10 @@ from pathlib import Path
 import os
 import gc
 
+import argparse
+
 EPOCHS = [10, 25, 50, 100,  150]
-K = [0,1]  #
+K = [2]  #
 
 overall_logfile = Path(f"./new_logs/log_{datetime.now().strftime('%Y%m%d-%H%M%S')}.csv")
 
@@ -182,56 +184,59 @@ X_mushrooms_train, X_mushrooms_test, y_mushrooms_train, y_mushrooms_test = train
 )
 
 
-process_dataset(
-    "superstore",
-    X_super,
-    y_super,
-    SUPERSTORE_DF_ENC,
-    SUPERSTORE_ENCODERS,
-    X_super_train,
-    X_super_test,
-    y_super_train,
-    y_super_test,
-    EPOCHS,
-    K,
-    timestamp_id,
-    overall_logfile
-)
+parser = argparse.ArgumentParser(description='Provide dataset name')
+parser.add_argument('--dataset', type=str, help='Dataset name')
 
-snapshot = tracemalloc.take_snapshot()
-top_stats = snapshot.statistics('lineno')
-for stat in top_stats[:10]:
-    print(stat)
+args = parser.parse_args()
 
-
-process_dataset(
-    "credit_risk",
-    X_credit,
-    y_credit,
-    CREDIT_RISK_DF_ENC,
-    CREDIT_RISK_ENCODERS,
-    X_credit_train,
-    X_credit_test,
-    y_credit_train,
-    y_credit_test,
-    EPOCHS,
-    K,
-    timestamp_id,
-    overall_logfile
-)
-
-process_dataset(
-    "mushrooms",
-    X_mushrooms,
-    y_mushrooms,
-    MUSHROOMS_DF_ENC,
-    MUSHROOMS_ENCODERS,
-    X_mushrooms_train,
-    X_mushrooms_test,
-    y_mushrooms_train,
-    y_mushrooms_test,
-    EPOCHS,
-    K,
-    timestamp_id,
-    overall_logfile
-)
+if args.dataset == "superstore":
+    process_dataset(
+        "superstore",
+        X_super,
+        y_super,
+        SUPERSTORE_DF_ENC,
+        SUPERSTORE_ENCODERS,
+        X_super_train,
+        X_super_test,
+        y_super_train,
+        y_super_test,
+        EPOCHS,
+        K,
+        timestamp_id,
+        overall_logfile
+    )
+elif args.dataset == "credit_risk":
+    process_dataset(
+        "credit_risk",
+        X_credit,
+        y_credit,
+        CREDIT_RISK_DF_ENC,
+        CREDIT_RISK_ENCODERS,
+        X_credit_train,
+        X_credit_test,
+        y_credit_train,
+        y_credit_test,
+        EPOCHS,
+        K,
+        timestamp_id,
+        overall_logfile
+    )
+elif args.dataset == "mushrooms":
+    process_dataset(
+        "mushrooms",
+        X_mushrooms,
+        y_mushrooms,
+        MUSHROOMS_DF_ENC,
+        MUSHROOMS_ENCODERS,
+        X_mushrooms_train,
+        X_mushrooms_test,
+        y_mushrooms_train,
+        y_mushrooms_test,
+        EPOCHS,
+        K,
+        timestamp_id,
+        overall_logfile
+    )
+else:
+    print("Dataset not found")
+    exit(1)
