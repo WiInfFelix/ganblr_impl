@@ -1,0 +1,8 @@
+Event;Model;Epochs;K;Dataset;Test;Metric;Value
+trtr;GANBLR;10;0;superstore;adaboost;accuracy;0.9104552276138069
+trtr;GANBLR;10;0;superstore;random_forest;accuracy;0.9639819909954978
+trtr;GANBLR;10;0;superstore;svm;accuracy;0.928464232116058
+trtr;GANBLR;10;0;superstore;adaboost;accuracy;0.12856428214107055
+trtr;GANBLR;10;0;superstore;random_forest;accuracy;0.9289644822411206
+trtr;GANBLR;10;0;superstore;svm;accuracy;0.928464232116058
+sdv_eval;GANBLR;10;0;superstore;sdv_eval;quality_score;0.3862609232308509
