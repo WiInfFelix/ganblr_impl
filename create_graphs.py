@@ -17,12 +17,9 @@ def create_super_table_for_dataset(frame: pd.DataFrame, dataset_name: str):
     f = frame.copy()
     f = f.drop(columns=["Dataset"])
 
-    # drop all where Metric == sdv_eval
-    f = f[f["Test"] != "sdv_eval"]
-
-    f.iloc[3::6, f.columns.get_loc("Event")] = "tstr"
-    f.iloc[4::6, f.columns.get_loc("Event")] = "tstr"
-    f.iloc[5::6, f.columns.get_loc("Event")] = "tstr"
+    for i, v in enumerate(f["Event"]):
+        if v == "sdv_eval":
+            f.loc[i-3:i-1, "Event"] = "tstr"
 
     f_group = f.groupby(["Model", "Epochs", "K", "Event", "Test", "Metric"])[
         "Value"
@@ -144,22 +141,22 @@ superstore = pd.read_csv(SUPERSTORE_TRTR_LOGS, delimiter=";")
 credit_risk = pd.read_csv(CREDIT_RISK_TRTR_LOGS, delimiter=";")
 mushrooms = pd.read_csv(MUSHROOMS_TRTR_LOGS, delimiter=";")
 
-# create_super_table_for_dataset(superstore, "superstore")
-# create_super_table_for_dataset(credit_risk, "credit_risk")
-# create_super_table_for_dataset(mushrooms, "mushrooms")
+create_super_table_for_dataset(superstore, "superstore")
+create_super_table_for_dataset(credit_risk, "credit_risk")
+create_super_table_for_dataset(mushrooms, "mushrooms")
 
-create_comparison_accuracy_test_dataset(superstore, "superstore", "adaboost")
-create_comparison_accuracy_test_dataset(credit_risk, "credit_risk", "adaboost")
-create_comparison_accuracy_test_dataset(mushrooms, "mushrooms", "adaboost")
+# create_comparison_accuracy_test_dataset(superstore, "superstore", "adaboost")
+# create_comparison_accuracy_test_dataset(credit_risk, "credit_risk", "adaboost")
+# create_comparison_accuracy_test_dataset(mushrooms, "mushrooms", "adaboost")
 
-create_comparison_accuracy_test_dataset(superstore, "superstore", "svm")
-create_comparison_accuracy_test_dataset(credit_risk, "credit_risk", "svm")
-create_comparison_accuracy_test_dataset(mushrooms, "mushrooms", "svm")
+# create_comparison_accuracy_test_dataset(superstore, "superstore", "svm")
+# create_comparison_accuracy_test_dataset(credit_risk, "credit_risk", "svm")
+# create_comparison_accuracy_test_dataset(mushrooms, "mushrooms", "svm")
 
-create_comparison_accuracy_test_dataset(superstore, "superstore", "random_forest")
-create_comparison_accuracy_test_dataset(credit_risk, "credit_risk", "random_forest")
-create_comparison_accuracy_test_dataset(mushrooms, "mushrooms", "random_forest")
+# create_comparison_accuracy_test_dataset(superstore, "superstore", "random_forest")
+# create_comparison_accuracy_test_dataset(credit_risk, "credit_risk", "random_forest")
+# create_comparison_accuracy_test_dataset(mushrooms, "mushrooms", "random_forest")
 
-create_comparison_sdv_eval_dataset(superstore, "superstore")
-create_comparison_sdv_eval_dataset(credit_risk, "credit_risk")
-create_comparison_sdv_eval_dataset(mushrooms, "mushrooms")
+# create_comparison_sdv_eval_dataset(superstore, "superstore")
+# create_comparison_sdv_eval_dataset(credit_risk, "credit_risk")
+# create_comparison_sdv_eval_dataset(mushrooms, "mushrooms")

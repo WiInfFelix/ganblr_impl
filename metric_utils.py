@@ -76,8 +76,13 @@ def get_sdv_metrics(
     """Calculates the evaluation metrics using the SDV library"""
 
     # cast real data and synth data to categorical
-    real_data = real_data.astype("category")
-    synth_data = synth_data.astype("category")
+    #real_data = real_data.astype("category")
+    #synth_data = synth_data.astype("category")
+
+    # cast synth data to same type as real data
+
+    for col in synth_data.columns:
+        synth_data[col] = synth_data[col].astype(real_data[col].dtype)
 
     metadata = SingleTableMetadata()
     metadata.detect_from_dataframe(real_data)
