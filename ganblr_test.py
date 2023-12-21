@@ -1,13 +1,14 @@
 from time import sleep
 import pandas as pd
 import tracemalloc
+
 # import numpy as np
 from ganblr.models import GANBLR
 from data_utils import (
     transfrom_dataframe_discrete,
     preprocess_superstore,
     preprocess_credit_risk,
-    preprocess_mushroom
+    preprocess_mushroom,
 )
 
 from sklearn.model_selection import train_test_split
@@ -22,12 +23,12 @@ import gc
 
 import argparse
 
-EPOCHS = [10, 25, 50, 100,  150]
-K = [2]  #
+EPOCHS = [10, 25, 50, 100, 150]
+K = [0, 1]  #
 
 overall_logfile = Path(f"./new_logs/log_{datetime.now().strftime('%Y%m%d-%H%M%S')}.csv")
 
-os.environ['XLA_FLAGS'] = '--xla_gpu_cuda_data_dir=/usr/lib/cuda/' 
+os.environ["XLA_FLAGS"] = "--xla_gpu_cuda_data_dir=/usr/lib/cuda/"
 
 timestamp_id = datetime.now().strftime("%Y%m%d-%H%M%S")
 
@@ -37,7 +38,22 @@ with open(overall_logfile, "w") as f:
 
 tracemalloc.start()
 
-def process_dataset(dataset_name, X, y, df_enc, encoders, X_train, X_test, y_train, y_test, epochs, K, timestamp_id, overall_logfile):
+
+def process_dataset(
+    dataset_name,
+    X,
+    y,
+    df_enc,
+    encoders,
+    X_train,
+    X_test,
+    y_train,
+    y_test,
+    epochs,
+    K,
+    timestamp_id,
+    overall_logfile,
+):
     for epoch in epochs:
         for k in K:
             for i in range(1, 4):
@@ -57,21 +73,23 @@ def process_dataset(dataset_name, X, y, df_enc, encoders, X_train, X_test, y_tra
                         synth_data[[col]].astype(int)
                     )
 
-                synth_data_clear.to_csv(f"./synth_data/{timestamp_id}_ganblr_synth_data_{dataset_name}_{epoch}_{k}_{i}.csv")
+                synth_data_clear.to_csv(
+                    f"./synth_data/{timestamp_id}_ganblr_synth_data_{dataset_name}_{epoch}_{k}_{i}.csv"
+                )
 
                 # get metrics
-                get_trtr_metrics(
-                    X_train,
-                    X_test,
-                    y_train,
-                    y_test,
-                    synth_data,
-                    dataset_name,
-                    "GANBLR",
-                    overall_logfile,
-                    epoch,
-                    k,
-                )
+                # get_trtr_metrics(
+                #     X_train,
+                #     X_test,
+                #     y_train,
+                #     y_test,
+                #     synth_data,
+                #     dataset_name,
+                #     "GANBLR",
+                #     overall_logfile,
+                #     epoch,
+                #     k,
+                # )
 
                 get_sdv_metrics(
                     real_data=df_enc,
@@ -82,12 +100,12 @@ def process_dataset(dataset_name, X, y, df_enc, encoders, X_train, X_test, y_tra
                     epochs=epoch,
                     k=k,
                     timestamp=timestamp_id,
-                    i=i
+                    i=i,
                 )
 
                 del ganblr
                 gc.collect()
-        
+
         for i in range(1, 4):
             metadata = SingleTableMetadata()
             metadata.detect_from_dataframe(data=df_enc)
@@ -105,20 +123,22 @@ def process_dataset(dataset_name, X, y, df_enc, encoders, X_train, X_test, y_tra
                     synth_data_ctgan[[col]].astype(int)
                 )
 
-            synth_data_ctgan_clear.to_csv(f"./synth_data/{timestamp_id}_ctgan_synth_data_{dataset_name}_{epoch}_{k}_{i}.csv")
-
-            get_trtr_metrics(
-                X_train,
-                X_test,
-                y_train,
-                y_test,
-                synth_data_ctgan,
-                dataset_name,
-                "CTGAN",
-                overall_logfile,
-                epoch,
-                0,
+            synth_data_ctgan_clear.to_csv(
+                f"./synth_data/{timestamp_id}_ctgan_synth_data_{dataset_name}_{epoch}_{k}_{i}.csv"
             )
+
+            # get_trtr_metrics(
+            #     X_train,
+            #     X_test,
+            #     y_train,
+            #     y_test,
+            #     synth_data_ctgan,
+            #     dataset_name,
+            #     "CTGAN",
+            #     overall_logfile,
+            #     epoch,
+            #     0,
+            # )
 
             get_sdv_metrics(
                 real_data=df_enc,
@@ -129,14 +149,11 @@ def process_dataset(dataset_name, X, y, df_enc, encoders, X_train, X_test, y_tra
                 epochs=epoch,
                 k=0,
                 timestamp=timestamp_id,
-                i=i
+                i=i,
             )
 
             del ctgan
             gc.collect()
-
-
-
 
 
 SUPERSTORE_PATH = Path("datasets/SampleSuperstore.csv")
@@ -179,13 +196,16 @@ X_credit_train, X_credit_test, y_credit_train, y_credit_test = train_test_split(
 X_mushrooms = MUSHROOMS_DF_ENC.drop("class", axis=1)
 y_mushrooms = MUSHROOMS_DF_ENC["class"]
 
-X_mushrooms_train, X_mushrooms_test, y_mushrooms_train, y_mushrooms_test = train_test_split(
-    X_mushrooms, y_mushrooms, test_size=0.2, random_state=42
-)
+(
+    X_mushrooms_train,
+    X_mushrooms_test,
+    y_mushrooms_train,
+    y_mushrooms_test,
+) = train_test_split(X_mushrooms, y_mushrooms, test_size=0.2, random_state=42)
 
 
-parser = argparse.ArgumentParser(description='Provide dataset name')
-parser.add_argument('--dataset', type=str, help='Dataset name')
+parser = argparse.ArgumentParser(description="Provide dataset name")
+parser.add_argument("--dataset", type=str, help="Dataset name")
 
 args = parser.parse_args()
 
@@ -203,7 +223,7 @@ if args.dataset == "superstore":
         EPOCHS,
         K,
         timestamp_id,
-        overall_logfile
+        overall_logfile,
     )
 elif args.dataset == "credit_risk":
     process_dataset(
@@ -219,7 +239,7 @@ elif args.dataset == "credit_risk":
         EPOCHS,
         K,
         timestamp_id,
-        overall_logfile
+        overall_logfile,
     )
 elif args.dataset == "mushrooms":
     process_dataset(
@@ -235,7 +255,7 @@ elif args.dataset == "mushrooms":
         EPOCHS,
         K,
         timestamp_id,
-        overall_logfile
+        overall_logfile,
     )
 else:
     print("Dataset not found")

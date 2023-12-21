@@ -1,230 +1,185 @@
-\begin{longtable}{llllllr}
+\begin{longtable}{lllllr}
 \caption{Results for superstore} \\
 \toprule
- &  &  &  &  &  & Value \\
-Model & Epochs & K & Event & Test & Metric &  \\
+ &  &  &  &  & Value \\
+Model & Epochs & K & Test & Event &  \\
 \midrule
 \endfirsthead
 \caption[]{Results for superstore} \\
 \toprule
- &  &  &  &  &  & Value \\
-Model & Epochs & K & Event & Test & Metric &  \\
+ &  &  &  &  & Value \\
+Model & Epochs & K & Test & Event &  \\
 \midrule
 \endhead
 \midrule
-\multicolumn{7}{r}{Continued on next page} \\
+\multicolumn{6}{r}{Continued on next page} \\
 \midrule
 \endfoot
 \bottomrule
 \endlastfoot
-\multirow[t]{35}{*}{CTGAN} & \multirow[t]{7}{*}{10} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.773793 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.964816 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.891112 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.927630 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
- & \multirow[t]{7}{*}{25} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.746977 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.965149 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.886276 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.927797 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
- & \multirow[t]{7}{*}{50} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.746381 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.964482 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.894947 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.927964 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
- & \multirow[t]{7}{*}{100} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.774445 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.965149 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.851092 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.926797 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
- & \multirow[t]{7}{*}{150} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.791965 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.964649 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.565950 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.931466 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
-\multirow[t]{70}{*}{GANBLR} & \multirow[t]{14}{*}{10} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.385461 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.964315 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.509588 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.930132 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{3-7} \cline{4-7} \cline{5-7}
- &  & \multirow[t]{7}{*}{1} & sdv_eval & sdv_eval & quality_score & 0.434963 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.963815 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.902451 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.931299 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
- & \multirow[t]{14}{*}{25} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.385222 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.964482 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.609972 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.945806 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{3-7} \cline{4-7} \cline{5-7}
- &  & \multirow[t]{7}{*}{1} & sdv_eval & sdv_eval & quality_score & 0.443762 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.963815 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.874437 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.951642 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
- & \multirow[t]{14}{*}{50} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.379399 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.965483 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.796565 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.952810 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{3-7} \cline{4-7} \cline{5-7}
- &  & \multirow[t]{7}{*}{1} & sdv_eval & sdv_eval & quality_score & 0.434124 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.963982 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.758879 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.959480 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
- & \multirow[t]{14}{*}{100} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.366412 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.964149 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.770218 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.954144 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{3-7} \cline{4-7} \cline{5-7}
- &  & \multirow[t]{7}{*}{1} & sdv_eval & sdv_eval & quality_score & 0.425266 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.965316 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.912790 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.923128 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.929798 \\
-\cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
- & \multirow[t]{14}{*}{150} & \multirow[t]{7}{*}{0} & sdv_eval & sdv_eval & quality_score & 0.355619 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.964816 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.769218 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.952309 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.929631 \\
-\cline{3-7} \cline{4-7} \cline{5-7}
- &  & \multirow[t]{7}{*}{1} & sdv_eval & sdv_eval & quality_score & 0.416814 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{trtr} & adaboost & accuracy & 0.910455 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.966150 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.928464 \\
-\cline{4-7} \cline{5-7}
- &  &  & \multirow[t]{3}{*}{tstr} & adaboost & accuracy & 0.665166 \\
-\cline{5-7}
- &  &  &  & random_forest & accuracy & 0.927130 \\
-\cline{5-7}
- &  &  &  & svm & accuracy & 0.929798 \\
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7}
+\multirow[t]{35}{*}{CTGAN} & \multirow[t]{7}{*}{10} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.891112 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.964816 \\
+ &  &  &  & TSTR & 0.927630 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.773793 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{2-6} \cline{3-6} \cline{4-6}
+ & \multirow[t]{7}{*}{25} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.886276 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.965149 \\
+ &  &  &  & TSTR & 0.927797 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.746977 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{2-6} \cline{3-6} \cline{4-6}
+ & \multirow[t]{7}{*}{50} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.894947 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.964482 \\
+ &  &  &  & TSTR & 0.927964 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.746381 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{2-6} \cline{3-6} \cline{4-6}
+ & \multirow[t]{7}{*}{100} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.851092 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.965149 \\
+ &  &  &  & TSTR & 0.926797 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.774445 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{2-6} \cline{3-6} \cline{4-6}
+ & \multirow[t]{7}{*}{150} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.565950 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.964649 \\
+ &  &  &  & TSTR & 0.931466 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.791965 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6}
+\multirow[t]{70}{*}{GANBLR} & \multirow[t]{14}{*}{10} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.509588 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.964315 \\
+ &  &  &  & TSTR & 0.930132 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.385461 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{3-6} \cline{4-6}
+ &  & \multirow[t]{7}{*}{1} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.902451 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.963815 \\
+ &  &  &  & TSTR & 0.931299 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.434963 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{2-6} \cline{3-6} \cline{4-6}
+ & \multirow[t]{14}{*}{25} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.609972 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.964482 \\
+ &  &  &  & TSTR & 0.945806 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.385222 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{3-6} \cline{4-6}
+ &  & \multirow[t]{7}{*}{1} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.874437 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.963815 \\
+ &  &  &  & TSTR & 0.951642 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.443762 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{2-6} \cline{3-6} \cline{4-6}
+ & \multirow[t]{14}{*}{50} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.796565 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.965483 \\
+ &  &  &  & TSTR & 0.952810 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.379399 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{3-6} \cline{4-6}
+ &  & \multirow[t]{7}{*}{1} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.758879 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.963982 \\
+ &  &  &  & TSTR & 0.959480 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.434124 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{2-6} \cline{3-6} \cline{4-6}
+ & \multirow[t]{14}{*}{100} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.770218 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.964149 \\
+ &  &  &  & TSTR & 0.954144 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.366412 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.928464 \\
+\cline{3-6} \cline{4-6}
+ &  & \multirow[t]{7}{*}{1} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.912790 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.965316 \\
+ &  &  &  & TSTR & 0.923128 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.425266 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.929798 \\
+\cline{2-6} \cline{3-6} \cline{4-6}
+ & \multirow[t]{14}{*}{150} & \multirow[t]{7}{*}{0} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.769218 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.964816 \\
+ &  &  &  & TSTR & 0.952309 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.355619 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.929631 \\
+\cline{3-6} \cline{4-6}
+ &  & \multirow[t]{7}{*}{1} & \multirow[t]{2}{*}{AdaBoost} & TRTR & 0.910455 \\
+ &  &  &  & TSTR & 0.665166 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{Random Forest} & TRTR & 0.966150 \\
+ &  &  &  & TSTR & 0.927130 \\
+\cline{4-6}
+ &  &  & SDV-Eval & SDV-Eval & 0.416814 \\
+\cline{4-6}
+ &  &  & \multirow[t]{2}{*}{SVM} & TRTR & 0.928464 \\
+ &  &  &  & TSTR & 0.929798 \\
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6}
 \end{longtable}

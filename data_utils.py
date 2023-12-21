@@ -118,12 +118,12 @@ def convert_datasets(
 
 def preprocess_superstore(frame: pd.DataFrame):
     preproc_frame = frame.copy()
-    
+
     preproc_frame["Postal Code"] = round(preproc_frame["Postal Code"] / 1000) * 1000
 
     # convert postal code to string
     preproc_frame["Postal Code"] = preproc_frame["Postal Code"].astype(str)
-    
+
     preproc_frame = preproc_frame.drop("City", axis=1)
 
     return preproc_frame
@@ -146,7 +146,8 @@ def preprocess_mushroom(frame: pd.DataFrame):
     preproc_frame = frame.copy()
 
     preproc_frame = frame.dropna()
-    
+
+    # reorder columns so class is last
     preproc_frame = preproc_frame[
         [col for col in preproc_frame.columns if col != "class"] + ["class"]
     ]
@@ -170,7 +171,9 @@ def transfrom_dataframe_discrete(
                     n_bins=col_d.nunique(), encode=encode, strategy=strategy
                 )
             else:
-                kbins = KBinsDiscretizer(n_bins=max_bins, encode=encode, strategy=strategy)
+                kbins = KBinsDiscretizer(
+                    n_bins=max_bins, encode=encode, strategy=strategy
+                )
             trans_data = kbins.fit_transform(col_d.values.reshape(-1, 1))
             enc_frame[col_n] = trans_data
             encoders[col_n] = kbins
