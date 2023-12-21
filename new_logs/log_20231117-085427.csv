@@ -1,0 +1,10 @@
+Event;Model;Epochs;K;Dataset;Test;Metric;Value
+sdv_eval;GANBLR;150;0;credit_risk;sdv_eval;quality_score;0.4718710518129122
+sdv_eval;GANBLR;150;0;credit_risk;sdv_eval;quality_score;0.46664423408609457
+sdv_eval;GANBLR;150;0;credit_risk;sdv_eval;quality_score;0.46408340158340144
+sdv_eval;GANBLR;150;1;credit_risk;sdv_eval;quality_score;0.4588614777568266
+sdv_eval;GANBLR;150;1;credit_risk;sdv_eval;quality_score;0.4567631849608593
+sdv_eval;GANBLR;150;1;credit_risk;sdv_eval;quality_score;0.45956051188609326
+sdv_eval;CTGAN;150;0;credit_risk;sdv_eval;quality_score;0.8404449639914755
+sdv_eval;CTGAN;150;0;credit_risk;sdv_eval;quality_score;0.8318561690654714
+sdv_eval;CTGAN;150;0;credit_risk;sdv_eval;quality_score;0.839400976028883
